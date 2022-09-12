@@ -1,0 +1,50 @@
+.orange-color {
+    color:#ff944d;
+}
+
+#calculator-section {
+    width: 400px;
+    height: auto;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+}
+
+#calculator-section .transaction-output {
+   height: 200px;
+    position: relative;
+}
+
+#calculator-section .transaction-output p {
+    position: absolute;
+    bottom: 0;
+    float: right;
+    font-size: 40px;
+    margin: 20px 0px 20px 20px;
+    text-align: right;
+    right: 20px;
+}
+
+#calculator-section .keys-output {
+    height: 60%;
+    flex-wrap: wrap;
+}
+
+#calculator-section .keys-output .key_btn {
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
+}
+
+#calculator-section .keys-output .key_btn {
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
+}
+
+#calculator-section .keys-output .key_delete, #calculator-section .keys-output .key_delete {
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
+}
