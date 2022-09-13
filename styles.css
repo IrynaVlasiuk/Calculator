@@ -8,6 +8,7 @@ body {
             radial-gradient(50% 30% ellipse at center top, #201e40 0%, rgba(0,0,0,0) 100%),
             radial-gradient(60% 50% ellipse at center bottom, #261226 0%, #100a1c 100%);
     min-height: 100vh;
+    overflow: hidden;
 }
 
 #calculator-section {
@@ -23,9 +24,31 @@ body {
     margin:auto;
 }
 
+#calculator-section.shake-animation {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
 #calculator-section .transaction-output {
-    height: 140px;
+    height: 160px;
     position: relative;
+}
+
+#calculator-section .transaction-output .entered-value {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    left: 0;
+    text-align: center;
+    top: 5px;
+    font-size: 31px;
+    color: #6cacc5;
+}
+
+#calculator-section .transaction-output .zoom-animation {
+    opacity: 1;
+    animation: zoom 1s;
 }
 
 #calculator-section .transaction-output p {
@@ -64,32 +87,49 @@ body {
     outline: 0;
 }
 
-@keyframes slideColor{
-    0%{
-        background-color: #387780;
+.warning {
+    background: -webkit-linear-gradient(45deg, #c97874 10%, #463042 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #8c5059;
+    font-weight: 400;
+    margin: 0 auto;
+    max-width: 9em;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(.5);
+        opacity: 1;
     }
-    33%{
-        background-color: #3f88c5;
+
+    70% {
+        transform: scale(2);
     }
-    66%{
-        background-color: #588b8b;
-    }
-    100%{
-        background-color: #387780;
+
+    100% {
+        opacity: 0;
     }
 }
 
-@keyframes slideColor1 {
-    0% {
-        background-color: #d9e6f2;
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, -50%, 0);
     }
-    33% {
-        background-color: #b3cce6;
+
+    20%, 80% {
+        transform: translate3d(2px, -50%, 0);
     }
-    66% {
-        background-color: #8cb3d9;
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, -50%, 0);
     }
-    100% {
-        background-color: #9fbfdf;
+
+    40%, 60% {
+        transform: translate3d(4px, -50%, 0);
     }
 }

@@ -1,3 +1,4 @@
+const calculatorDiv = document.querySelector("#calculator-section");
 const sectionTransaction = document.querySelector('.transaction-output');
 const sectionKeys = document.querySelector('.keys-output');
 
@@ -30,7 +31,7 @@ let mathItUp = {
     '+': (x, y) =>  x + y,
     '-': (x, y) => x - y,
     '*': (x, y) => x * y,
-    '/': (x, y) => !y ? null : x / y,
+    '/': (x, y) => x / y,
 }
 
 buttonsValues.map(btn => {
@@ -46,9 +47,13 @@ const newDisplayRowFirstValue = document.createElement('p');
 const zoomValue = document.createElement('div');
 
 newDisplayRowFirstValue.classList.add("orange-color");
+zoomValue.classList.add("entered-value");
 
 sectionTransaction.appendChild(newDisplayRowFirstValue);
 sectionTransaction.appendChild(zoomValue);
+
+const messageWarning = document.createElement("div");
+messageWarning.classList.add("warning");
 
 let firstOperand = '0';
 let secondOperand = '';
@@ -61,6 +66,8 @@ updateDisplay();
 const numberKeys = sectionKeys.querySelectorAll('.key_btn[data-action="false"]');
 
 numberKeys.forEach(key => {key.addEventListener('click', e => {
+    changeAnimation(e);
+
     if(isCalculateAction && !operator) {
         cleanDisplay();
         isCalculateAction = false;
@@ -79,13 +86,13 @@ numberKeys.forEach(key => {key.addEventListener('click', e => {
     }
 
     updateDisplay(firstOperand, operator, secondOperand);
-
     });
 });
 
 const actionKeys = sectionKeys.querySelectorAll('.key_btn[data-action="true"]');
 
 actionKeys.forEach(key => {key.addEventListener('click', e => {
+    changeAnimation(e);
 
     switch (e.currentTarget.dataset.value) {
         case "delete":
@@ -136,7 +143,10 @@ actionKeys.forEach(key => {key.addEventListener('click', e => {
 function updateDisplay(firstOperand = 0, operator = '', secondOperand)
 {
     newDisplayRowFirstValue.textContent = secondOperand ? `${firstOperand} ${operator} ${secondOperand}` : `${firstOperand} ${operator}`;
-    zoomValue.textContent = secondOperand ? `${firstOperand} ${operator} ${secondOperand}` : `${firstOperand} ${operator}`;
+
+    window.setTimeout(() => {
+        zoomValue.classList.remove("zoom-animation");
+    }, 800);
 }
 
 function calculate(firstOperand, operator, secondOperand)
@@ -147,12 +157,14 @@ function calculate(firstOperand, operator, secondOperand)
 
     let result = mathItUp[operator](firstOperand, secondOperand);
 
-    if(!result) {
-        return;
-        //TODO handle division on 0
+    if(!isFinite(result)) {
+        calculatorDiv.classList.add("shake-animation");
+        calculatorDiv.append(messageWarning);
+        messageWarning.innerText = "Don`t divide by zero";
+        result = 0;
     }
 
-    return result ? result.toString().slice(0, DISPLAY_MAX_NUMBER) : '';
+    return  result.toString().slice(0, DISPLAY_MAX_NUMBER);
 }
 
 function updateOperand(operand, key)
@@ -227,4 +239,12 @@ function cleanDisplay()
     firstOperand = '0';
     operator = '';
     secondOperand = '';
+}
+
+function changeAnimation(e)
+{
+    zoomValue.classList.add("zoom-animation");
+    zoomValue.textContent = e.target.innerText;
+    messageWarning.remove();
+    calculatorDiv.classList.remove('shake-animation');
 }
