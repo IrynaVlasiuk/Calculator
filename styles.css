@@ -1,18 +1,30 @@
 .orange-color {
-    color:#ff944d;
+    color: #9f5841;
+}
+
+body {
+    background: #100a1c;
+    background-image:
+            radial-gradient(50% 30% ellipse at center top, #201e40 0%, rgba(0,0,0,0) 100%),
+            radial-gradient(60% 50% ellipse at center bottom, #261226 0%, #100a1c 100%);
+    min-height: 100vh;
 }
 
 #calculator-section {
-    width: 400px;
+    width: 360px;
     height: auto;
-    margin: 100px auto;
     display: flex;
     flex-direction: column;
-    border: 1px solid;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin:auto;
 }
 
 #calculator-section .transaction-output {
-   height: 200px;
+    height: 140px;
     position: relative;
 }
 
@@ -32,19 +44,52 @@
 }
 
 #calculator-section .keys-output .key_btn {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     font-size: 30px;
+    margin: 10px;
+    border: none;
+    background: rgba(42, 50, 113, 0.28);
 }
 
-#calculator-section .keys-output .key_btn {
-    width: 100px;
-    height: 100px;
-    font-size: 30px;
+#calculator-section .keys-output .key_btn[data-action="false"] {
+    color: #6cacc5;
 }
 
-#calculator-section .keys-output .key_delete, #calculator-section .keys-output .key_delete {
-    width: 100px;
-    height: 100px;
-    font-size: 30px;
+#calculator-section .keys-output .key_btn:hover {
+    background: #201e40;
+}
+
+#calculator-section .keys-output .key_btn:focus {
+    outline: 0;
+}
+
+@keyframes slideColor{
+    0%{
+        background-color: #387780;
+    }
+    33%{
+        background-color: #3f88c5;
+    }
+    66%{
+        background-color: #588b8b;
+    }
+    100%{
+        background-color: #387780;
+    }
+}
+
+@keyframes slideColor1 {
+    0% {
+        background-color: #d9e6f2;
+    }
+    33% {
+        background-color: #b3cce6;
+    }
+    66% {
+        background-color: #8cb3d9;
+    }
+    100% {
+        background-color: #9fbfdf;
+    }
 }

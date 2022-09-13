@@ -38,13 +38,17 @@ buttonsValues.map(btn => {
         `<button class="key_btn key_${btn.value}" data-value="${btn.value}" data-action="${btn.action}">${btn.key}</button>`)
 });
 
-let orangeColorElements = document.querySelectorAll('.key_btn:not(.key_number,.key_point)');
+let orangeColorElements = document.querySelectorAll('.key_btn[data-action="true"]');
 
 orangeColorElements.forEach(el => el.classList.add('orange-color'));
 
 const newDisplayRowFirstValue = document.createElement('p');
+const zoomValue = document.createElement('div');
+
+newDisplayRowFirstValue.classList.add("orange-color");
 
 sectionTransaction.appendChild(newDisplayRowFirstValue);
+sectionTransaction.appendChild(zoomValue);
 
 let firstOperand = '0';
 let secondOperand = '';
@@ -132,6 +136,7 @@ actionKeys.forEach(key => {key.addEventListener('click', e => {
 function updateDisplay(firstOperand = 0, operator = '', secondOperand)
 {
     newDisplayRowFirstValue.textContent = secondOperand ? `${firstOperand} ${operator} ${secondOperand}` : `${firstOperand} ${operator}`;
+    zoomValue.textContent = secondOperand ? `${firstOperand} ${operator} ${secondOperand}` : `${firstOperand} ${operator}`;
 }
 
 function calculate(firstOperand, operator, secondOperand)
